@@ -21,7 +21,10 @@ end
  def sum(*args)
     p args.inspect
     result=0
-    args.each do |item|
+   # args.each do |item|
+    #    result=result+item
+    #end
+    for item in args
         result=result+item
     end
     result
