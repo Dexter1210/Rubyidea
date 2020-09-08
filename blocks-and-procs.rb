@@ -28,4 +28,4 @@ end
 
 my_proc.call # for proc use call method
 
-hug &my_proc
+hug &my_proc #for passing proc use & sign that is conversion of proc to block
