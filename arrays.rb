@@ -52,3 +52,19 @@ squares=nums.map do |n|
      n*n
 end
 p squares
+
+nums=[1,2,3,4,5,6]
+p nums
+squares=nums.map.with_index do |n,index| #block of code only exception to object
+    {index: n*n}
+end
+
+p squares
+ p squares[0][:index]
+
+ numbers=[1,2,3,4,5,6,7,8,9,10]
+ greater_4=numbers.select do |n|
+    n>4
+end
+
+p greater_4
