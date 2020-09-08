@@ -68,3 +68,7 @@ p squares
 end
 
 p greater_4
+#alt method
+greater_4=numbers.select{|n| n>4}
+
+p greater_4
