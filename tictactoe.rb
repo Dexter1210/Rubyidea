@@ -71,4 +71,77 @@ WIN_COMBINATIONS=[
     [[0][2],[1][1],[2][0]]
 
 ]
-    
+
+def won?(board)
+    WIN_COMBINATIONS.each do|single_win_combo|
+        win_index_1r=single_win_combo[0][0]
+        win_index_1c=single_win_combo[0][1]
+        win_index_2r=single_win_combo[1][0]
+        win_index_2c=single_win_combo[1][1]
+        win_index_3r=single_win_combo[2][0]
+        win_index_3c=single_win_combo[2][1]
+
+        position_1=board[win_index_1r][win_index_1c]
+        position_2=board[win_index_2r][win_index_2c]
+        position_3=board[win_index_3r][win_index_3c]
+
+        if position_1==position_2 && position_2 == position_3 && position_taken?(board, win_index_1r,win_index_1c)
+            return single_win_combo
+        end
+    end
+    return false
+end
+
+      def full?(board)
+        if board.any? {|row,column| row == nil || row == "-" && column==nil || column=="-"}
+          return false
+        else
+          return true
+        end
+      end
+      
+      def draw?(board)
+         if !won?(board) && full?(board)
+           return true
+         elsif!full?(board) && !won?(board)
+           return false
+         else won?(board)
+           return false
+         end
+      end
+      
+      def over?(board)
+        if draw?(board) || won?(board) || full?(board) 
+          return true
+        else
+          return false
+        end
+      end
+
+      def winner(board)
+        if won?(board)
+          return board[won?(board)[0][0]]
+        end
+      end
+      
+      def play(board)
+        counter = 0
+        until counter == 9
+        turn(board)
+        counter += 1
+        end
+      end
+      
+      def play(board)
+        until over?(board)
+          turn(board) 
+        end
+        if won?(board)
+          winner(board) == "X" || winner(board) == "O"
+          puts "Congratulations #{winner(board)}!"
+        else draw?(board)
+          puts "Draw"
+        end
+      end
+
+    play(board)
