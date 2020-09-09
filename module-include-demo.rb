@@ -24,17 +24,24 @@ module HEncryption
 
     end
 
+    def timings
+        "The time is great"
+    end
+
 end
 
 class Person
     include Encryption
-    include HEncryption
+    extend HEncryption #2 methods in package i.e. overriding
+    #extend makes package's method static
 
 
 end
 
 devesh=Person.new
 p devesh.encrypt("secret message")
+
+p Person.timings
 
 #latest module alwyas overrides other methods
 
