@@ -1,19 +1,27 @@
+require_relative "./my-enumerable"
+
 class Store
 
     include Enumerable
-    attr_reader :snacks
+    attr_reader :a
 
     def initialize
-        @snacks=[]
+        
+        @a=[]
     end
-    def add_snack(snack)
-        snacks<<snack
+    #
+
+    def add_a(ele)
+        a<<ele
     end
 
+
     #kind of interface(each)
+    
+
     def each
-        snacks.each do |snack|
-            yield snack
+        a.each do |ele|
+            yield ele
         end
     end
 
@@ -21,13 +29,18 @@ class Store
 end
 
 mumbai=Store.new
-mumbai.add_snack("VadaPav")
-mumbai.add_snack("Misal pav")
-mumbai.add_snack("Samosa")
+
+mumbai.add_a(1)
+mumbai.add_a(2)
+mumbai.add_a(3)
+
 
 p mumbai
-p mumbai.first
-p mumbai.map{|snack| snack.upcase}
-p mumbai.select{|snack| snack.downcase.include?("v")}
+
+p mumbai.max
+
+p mumbai.min
+
+p mumbai.sort
 
 
