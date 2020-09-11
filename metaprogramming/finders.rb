@@ -17,7 +17,18 @@ $db={
     { id: 2, title: "Project 2", owner: "yogesh"},
     { id: 3, title: "Project 3", owner: "shritesh"},
     { id: 4, title: "Project 4", owner: "khushboo"},
-  ]
+  ],
+
+    technologies:[
+        {id:1, tech:"BlockChain"},
+        {id:2, tech:"Random Forest Regression"},
+        {id:3, tech:"Web API"},
+        {id:4, tech:"Neural Networks"}
+
+
+
+
+    ]
 
 
 }
@@ -70,6 +81,10 @@ class Project < Model
     connect
 end
 
+class Technology < Model
+    connect
+end
+
 puts "Find task by id1"
 task=Task.find_by_id(1){
     puts "Successful found it"
@@ -84,4 +99,10 @@ p tasks
 
 user1=User.find_by_id(2)
 p user1
+
+technology_used1=Technology.find_by_id(1)
+p technology_used1
+
+technology_used2=Technology.find_by_tech("BlockChain")
+p technology_used2
 
