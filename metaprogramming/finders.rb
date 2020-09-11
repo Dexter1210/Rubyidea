@@ -10,7 +10,14 @@ $db={
         {id:1,title:"task1",completed:true},
         {id:2,title:"task1",completed:false},
         {id:3,title:"task3",completed:true}
-    ]
+    ],
+
+    projects: [
+    { id: 1, title: "Project 1", owner: "devesh"},
+    { id: 2, title: "Project 2", owner: "yogesh"},
+    { id: 3, title: "Project 3", owner: "shritesh"},
+    { id: 4, title: "Project 4", owner: "khushboo"},
+  ]
 
 
 }
@@ -24,18 +31,43 @@ class Model
     def self.connect
         class_name= to_s.downcase.pluralize
         @data=$db[:"#{class_name}"]
-        p @data
-
+        
     end
 
+    def self.data
+        @data
+    end
 
-
+    def self.method_missing(method,*args,&block)
+        method_tokens=method.to_s.split("_")
+        search_field=method_tokens[2]
+        if method_tokens[0]=="find"
+            results=[]
+            self.data.each do |row|
+                if row.key?(search_field.to_sym)
+                    if args[0]==row[search_field.to_sym]
+                        results<<row
+                    end
+                end
+            end
+            results
+        else
+            super
+        end
+    end
 end
 
+
 class User < Model
+    connect
 end
 
 class Task < Model
+    connect
+end
+
+class Project < Model
+    connect
 end
 
 puts "Find task by id1"
